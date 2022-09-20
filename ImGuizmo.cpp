@@ -920,6 +920,7 @@ namespace ImGuizmo
 		  | ImGuiWindowFlags_NoMove
           | ImGuiWindowFlags_NoResize 
           | ImGuiWindowFlags_NoScrollbar
+          | ImGuiWindowFlags_NoBackground
 		  //| ImGuiWindowFlags_NoInputs
           | ImGuiWindowFlags_NoSavedSettings 
           //| ImGuiWindowFlags_NoFocusOnAppearing 
