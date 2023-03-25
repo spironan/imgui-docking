@@ -766,6 +766,8 @@ struct FlowAnimationController final : AnimationController
 
     void Release(FlowAnimation* animation);
 
+    void OnLinkDeleted(Link* link);
+
 private:
     FlowAnimation* GetOrCreate(Link* link);
 

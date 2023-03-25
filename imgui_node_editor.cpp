@@ -1944,6 +1944,8 @@ void ed::EditorContext::NotifyLinkDeleted(Link* link)
 {
     if (m_LastActiveLink == link)
         m_LastActiveLink = nullptr;
+
+    m_FlowAnimationController.OnLinkDeleted(link);
 }
 
 void ed::EditorContext::Suspend(SuspendFlags flags)
@@ -3261,6 +3263,15 @@ ed::FlowAnimation* ed::FlowAnimationController::GetOrCreate(Link* link)
 void ed::FlowAnimationController::Release(FlowAnimation* animation)
 {
     IM_UNUSED(animation);
+}
+
+void ed::FlowAnimationController::OnLinkDeleted(Link* link)
+{
+    for (auto& anim : m_Animations)
+    {
+        if (anim->m_Link == link)
+            anim->m_Link = nullptr;
+    }
 }
 
 
@@ -5126,7 +5137,7 @@ void ed::DeleteItemsAction::RemoveItem(bool deleteDependencies)
     }
 
     if (m_CurrentItemType == Link)
-        Editor->NotifyLinkDeleted(item->AsLink());
+        Editor->NotifyLinkDeleted(item->AsLink()); 
 }
 
 ed::Object* ed::DeleteItemsAction::DropCurrentItem()
