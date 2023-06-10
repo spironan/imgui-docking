@@ -617,6 +617,10 @@ void ImGui_ImplVulkan_RenderDrawData(ImDrawData* draw_data, VkCommandBuffer comm
                     IM_ASSERT(pcmd->TextureId == (ImTextureID)bd->FontDescriptorSet);
                     desc_set[0] = bd->FontDescriptorSet;
                 }
+                if (pcmd->TextureId == NULL)
+                {
+                    desc_set[0] = bd->FontDescriptorSet;
+                }
                 vkCmdBindDescriptorSets(command_buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, bd->PipelineLayout, 0, 1, desc_set, 0, NULL);
 
                 // Draw
